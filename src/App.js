@@ -31,7 +31,7 @@ class App extends Component {
       <div className="App">
         <h4>{this.state.likes} likes!</h4>
         <button onClick={this.like}><span role="img" aria-label="thumbs up">👍</span></button>
-        <button onClick={this.dislike}><span role="img" aria-label="thumbs down">👎</span></button>
+        <button onClick={this.dislike}><span role="img" aria-label="thumbs down">👎</span></button>`
         <input type="text" value={this.state.text} onChange={this.handleChange} />
         <p>{this.state.text}</p>
       </div>

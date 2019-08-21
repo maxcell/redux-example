@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Predux: Message Passing
 
-## Available Scripts
+## SWBATs
+- [ ] Explain the concept of message passing
+- [ ] Identify examples of message passing
+- [ ] Use message passing to control program flow
+- [ ] Explain how message passing could be used to manage state
 
-In the project directory, you can run:
+## Notes
+[Wiki: Message Passing](https://en.wikipedia.org/wiki/Message_passing)
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### What is message passing?
+```
+"Message passing is a technique for invoking behavior (i.e., running a program) on a computer. In contrast to the traditional technique of calling a program by name, message passing uses an object model to distinguish the general function from the specific implementations. The invoking program sends a message and relies on the object to select and execute the appropriate code." -Wikipedia
+```
 
-### `npm test`
+Message passing is built on the idea of centralization of program flow: all program flows pass through **one** central function, which in turn invokes the desired functionality. In order to do this, the central function needs to be told 2 things: **a type** which tells the central function which function to call, and, because functions sometimes need data, **a payload** which contains all of the data needed to run the desired function (usually an object).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Three Ingredients
+1. Some sort of type of thing you want to do + some sort of routing (e.g. case statement in CLI)
+2. Some way of getting data into your router (e.g. in API design, think params)
+3. The old state
 
-### `npm run build`
+### Examples of message passing
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Ruby CLIs
+```rb
+def router(choice, data)
+  case choice
+  when 1
+    print_turtles
+  when 2
+    new_turtle
+  when 3
+    select_turtle
+  when 4
+    create_turtle(data)
+  when 5
+    delete_turtle(data)
+  end
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+  menu
+end
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+- Routing + Controllers
+```rb
+class TurtlesController < ApplicationController
+  def index
+    # ...
+  end
 
-### `npm run eject`
+  def new
+    # ...
+  end
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  def create
+    # ...
+  end
+  
+  # etc.
+end
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# routes.rb
+get "/turtles", to: "turtles#index"
+get "/turtles/new", to: "turtles#new"
+post "/turtles", to: "turtles#create"
+```
