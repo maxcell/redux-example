@@ -19,15 +19,11 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.dark {
+  background-color: black;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-link {
+  color: #61dafb;
 }

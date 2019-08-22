@@ -9,6 +9,50 @@
 ## Notes
 [Wiki: Message Passing](https://en.wikipedia.org/wiki/Message_passing)
 
+```ruby
+ puts "1. See all dogs"
+ puts "2. Create a new dog"
+ puts "3. Change a dog's name"
+ puts "4 .Exit Program"
+
+ user_input = gets.chomp
+ router(user_input)
+
+def router(user_input, data)
+ switch(user_input):
+  case 1:
+    see_all_dogs
+  case 2:
+    create_a_dog(data)
+  case 3:
+    change_doggos_name
+  case 4:
+    exit
+  default:
+    return
+  end
+end 
+
+  def create_a_dog(name)
+    Dog.new(name: name)
+  end
+```
+
+
+```ruby
+resources :dogs, only: [:index, :show, :create]
+
+get "/dogs", to: "dogs#index"
+get "/dogs/:id", to: "dogs#show"
+post "/dogs", to: "dogs#create"
+
+```
+
+
+# The rules of Message Passing
+1. We need to know what action are we about to take (i.e. which user input)
+2. Additional may need to be sent... 🤷‍♂
+3. We need to know the previous state
 
 
 ### What is message passing?
